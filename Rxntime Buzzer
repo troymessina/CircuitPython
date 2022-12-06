@@ -1,0 +1,44 @@
+# Buzzer/Reaction Lab 4
+import time
+import board
+import digitalio
+import random
+
+ranDelay = 0
+# rotaryPinValue = 0
+# rotaryPinvalue = rotaryPin.value
+
+buzzerPin = digitalio.DigitalInOut(board.D13)
+buzzerPin.direction = digitalio.Direction.OUTPUT
+
+buttonPin = digitalio.DigitalInOut(board.D12)
+buttonPin.direction = digitalio.Direction.INPUT
+buttonPin.pull = digitalio.Pull.DOWN
+
+
+while True:
+    print("Push the Button to start game")
+    
+    while buttonPin.value == 0 :
+        pass
+    print("Get Ready!")
+    time.sleep(1)
+    print("Get Set!")
+    time.sleep(1)
+    
+    ranDelay = random.randint(0, 6)
+    
+    print("Go!")
+    time.sleep(ranDelay)
+    startTime = time.monotonic()
+    buzzerPin.value = True
+    
+    while buttonPin.value == 0:
+        pass
+    rxnTime = time.monotonic() - startTime
+    buzzerPin.value = False
+    print("Your time was")
+    print(rxnTime)
+    print("seconds")
+    
+    time.sleep(2)
