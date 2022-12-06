@@ -1,0 +1,18 @@
+# Button/LED Lab 2.1
+import board
+import digitalio
+
+# setup/output(LED)
+ledPin = digitalio.DigitalInOut(board.D13)
+ledPin.direction = digitalio.Direction.OUTPUT
+
+# setup/input(button)
+buttonPin = digitalio.DigitalInOut(board.D12)
+buttonPin.direction = digitalio.Direction.INPUT
+buttonPin.pull = digitalio.Pull.DOWN
+
+# reads the value of the button state (tells the LED to turn on/off respectively)
+while True:
+    if buttonPin.value:
+        ledPin.value = True
+    ledPin.value = False
