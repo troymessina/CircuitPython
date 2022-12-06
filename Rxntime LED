@@ -1,0 +1,42 @@
+# Button/Reaction Timing Lab 2.2
+import time
+import board
+import digitalio
+import random 
+
+ranDelay = 0
+
+ledPin = digitalio.DigitalInOut(board.D13)
+ledPin.direction = digitalio.Direction.OUTPUT
+
+buttonPin = digitalio.DigitalInOut(board.D12)
+buttonPin.direction = digitalio.Direction.INPUT
+buttonPin.pull = digitalio.Pull.DOWN
+
+
+while True:
+    print("Push the Button to start game :)")
+    
+    while buttonPin.value == 0 :
+        pass
+    print("Get Ready!")
+    time.sleep(1)
+    print("Get Set!")
+    time.sleep(1)
+    
+    ranDelay = random.randint(0, 6)
+    
+    print("Go!")
+    time.sleep(ranDelay)
+    startTime = time.monotonic()
+    ledPin.value = True
+    
+    while buttonPin.value == 0:
+        pass
+    rxnTime = time.monotonic() - startTime
+    ledPin.value = False
+    print("Your time was")
+    print(rxnTime)
+    print("seconds")
+    
+    time.sleep(2)
