@@ -1,0 +1,24 @@
+# LED/Rotary Lab 3.1
+import time
+import board
+import digitalio
+import analogio
+
+
+ranDelay = 0
+# rotaryPinValue = 0
+# rotaryPinvalue = rotaryPin.value
+
+ledPin = digitalio.DigitalInOut(board.D13)
+ledPin.direction = digitalio.Direction.OUTPUT
+
+rotaryPin = analogio.AnalogIn(board.A0)
+rotaryPin.direction = analogio.Direction.INPUT
+rotaryPin.pull = analogio.Pull.DOWN
+
+
+while True:
+    ledPin.value = True
+    time.sleep(rotaryPin.value)
+    ledPin.value = False
+    time.sleep(rotaryPin.value)
